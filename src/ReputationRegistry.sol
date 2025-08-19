@@ -34,4 +34,6 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
 
     // State variables
     mapping(address => ReputationData) private _reputations;
+    mapping(address => bool) public authorizedRaters;
+
 }
