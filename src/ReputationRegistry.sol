@@ -9,4 +9,4 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol
  * @dev Core contract for managing decentralized reputation scores
  * @notice This contract stores and calculates reputation scores with anti-gaming mechanisms
  */
-contract ReputationRegistry {}
+contract ReputationRegistry is Ownable, ReentrancyGuard {}
