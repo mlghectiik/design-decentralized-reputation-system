@@ -26,4 +26,9 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         uint256 lastDecayTime; // Timestamp of last decay application
         bool isRegistered; // Whether user is registered in the system
     }
+
+    struct RatingWeight {
+        uint256 raterReputation; // Reputation of the person giving the rating
+        uint256 weight; // Calculated weight for this rating
+    }
 }
