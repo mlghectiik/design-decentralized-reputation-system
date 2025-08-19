@@ -39,5 +39,6 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
 
     // Reputation calculation parameters
     uint256 public minRaterReputation = 300; // Minimum reputation to give weighted ratings
-    
+    uint256 public maxWeightMultiplier = 200; // Max weight multiplier (2x)
+
 }
