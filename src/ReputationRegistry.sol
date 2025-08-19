@@ -14,5 +14,6 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
     uint256 public constant MAX_REPUTATION = 1000;
     uint256 public constant MIN_REPUTATION = 0;
     uint256 public constant INITIAL_REPUTATION = 500;
+    uint256 public constant REPUTATION_DECAY_RATE = 1; // 0.1% per decay period
 
 }
