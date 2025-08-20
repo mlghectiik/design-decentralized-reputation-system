@@ -44,4 +44,10 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
 
     // Events
     event UserRegistered(address indexed user, uint256 initialReputation);
+    event ReputationUpdated(
+        address indexed user, 
+        uint256 oldScore, 
+        uint256 newScore, 
+        address indexed rater
+    );
 }
