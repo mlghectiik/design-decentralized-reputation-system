@@ -90,4 +90,52 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         
         emit UserRegistered(user, INITIAL_REPUTATION);
     }
+
+    function updateReputation(
+        address user,
+        uint256 rating,
+        address rater
+    ) external nonReentrant {
+        if (!authorizedRaters[msg.sender]) {
+            revert UnauthorizedRater(msg.sender);
+        }
+        
+        if (!_reputations[user].isRegistered) {
+            revert UserNotRegistered(user);
+        }
+        
+        if (!_reputations[rater].isRegistered) {
+            revert UserNotRegistered(rater);
+        }
+        
+        if (user == rater) {
+            revert SelfRatingNotAllowed();
+        }
+        
+        if (rating > MAX_REPUTATION) {
+            revert InvalidReputationScore(rating);
+        }
+        
+        // Apply decay before updating
+        _applyDecay(user);
+        
+        ReputationData storage userData = _reputations[user];
+        uint256 oldScore = userData.score;
+        
+        // Calculate weighted rating based on rater's reputation
+        uint256 weightedRating = _calculateWeightedRating(rating, rater);
+        
+        // Update reputation using weighted average
+        userData.totalRatings += 1;
+        userData.totalScore += weightedRating;
+        userData.score = userData.totalScore / userData.totalRatings;
+        userData.lastUpdateTime = block.timestamp;
+        
+        // Ensure score stays within bounds
+        if (userData.score > MAX_REPUTATION) {
+            userData.score = MAX_REPUTATION;
+        }
+        
+        emit ReputationUpdated(user, oldScore, userData.score, rater);
+    }
 }
