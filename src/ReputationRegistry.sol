@@ -41,4 +41,7 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
     uint256 public minRaterReputation = 300; // Minimum reputation to give weighted ratings
     uint256 public maxWeightMultiplier = 200; // Max weight multiplier (2x)
     bool public decayEnabled = true;
+
+    // Events
+    event UserRegistered(address indexed user, uint256 initialReputation);
 }
