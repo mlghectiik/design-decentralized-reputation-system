@@ -66,4 +66,6 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
     error InvalidParameters();
     error SelfRatingNotAllowed();
 
+    constructor(address _owner) Ownable(_owner) {}
+
 }
