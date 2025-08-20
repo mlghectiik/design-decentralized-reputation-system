@@ -57,4 +57,7 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         uint256 minRaterReputation,
         uint256 maxWeightMultiplier
     );
+
+    // Errors
+    error UserNotRegistered(address user);
 }
