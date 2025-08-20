@@ -91,6 +91,12 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         emit UserRegistered(user, INITIAL_REPUTATION);
     }
 
+    /**
+     * @dev Update a user's reputation based on a new rating
+     * @param user Address of the user being rated
+     * @param rating New rating score (0-1000)
+     * @param rater Address of the user giving the rating
+     */
     function updateReputation(
         address user,
         uint256 rating,
