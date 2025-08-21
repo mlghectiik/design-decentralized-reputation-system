@@ -173,4 +173,25 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         data.score = _calculateDecayedReputation(user);
         return data;
     }
+
+    function getRegisteredUsers(
+        uint256 offset,
+        uint256 limit
+    ) external view returns (address[] memory users) {
+        uint256 total = _registeredUsers.length;
+        
+        if (offset >= total) {
+            return new address[](0);
+        }
+        
+        uint256 end = offset + limit;
+        if (end > total) {
+            end = total;
+        }
+        
+        users = new address[](end - offset);
+        for (uint256 i = offset; i < end; i++) {
+            users[i - offset] = _registeredUsers[i];
+        }
+    }
 }
