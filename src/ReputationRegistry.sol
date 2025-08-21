@@ -200,4 +200,8 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
             users[i - offset] = _registeredUsers[i];
         }
     }
+
+    function getTotalUsers() external view returns (uint256) {
+        return _registeredUsers.length;
+    }
 }
