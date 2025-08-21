@@ -145,6 +145,11 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         emit ReputationUpdated(user, oldScore, userData.score, rater);
     }
 
+    /**
+     * @dev Get a user's current reputation score
+     * @param user Address of the user
+     * @return Current reputation score
+     */
     function getReputation(address user) external view returns (uint256) {
         if (!_reputations[user].isRegistered) {
             revert UserNotRegistered(user);
