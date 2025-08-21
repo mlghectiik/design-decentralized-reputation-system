@@ -144,4 +144,13 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         
         emit ReputationUpdated(user, oldScore, userData.score, rater);
     }
+
+    function getReputation(address user) external view returns (uint256) {
+        if (!_reputations[user].isRegistered) {
+            revert UserNotRegistered(user);
+        }
+        
+        // Calculate decay without applying it (view function)
+        return _calculateDecayedReputation(user);
+    }
 }
