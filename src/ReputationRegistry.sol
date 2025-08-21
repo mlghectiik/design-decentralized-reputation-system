@@ -144,4 +144,77 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         
         emit ReputationUpdated(user, oldScore, userData.score, rater);
     }
+
+    /**
+     * @dev Get a user's current reputation score
+     * @param user Address of the user
+     * @return Current reputation score
+     */
+    function getReputation(address user) external view returns (uint256) {
+        if (!_reputations[user].isRegistered) {
+            revert UserNotRegistered(user);
+        }
+        
+        // Calculate decay without applying it (view function)
+        return _calculateDecayedReputation(user);
+    }
+
+    /**
+     * @dev Get detailed reputation data for a user
+     * @param user Address of the user
+     * @return ReputationData struct with all reputation information
+     */
+    function getReputationData(address user) external view returns (ReputationData memory) {
+        if (!_reputations[user].isRegistered) {
+            revert UserNotRegistered(user);
+        }
+        
+        ReputationData memory data = _reputations[user];
+        data.score = _calculateDecayedReputation(user);
+        return data;
+    }
+
+    /**
+     * @dev Get all registered users (paginated for large datasets)
+     * @param offset Starting index
+     * @param limit Maximum number of users to return
+     * @return users Array of user addresses
+     */
+    function getRegisteredUsers(
+        uint256 offset,
+        uint256 limit
+    ) external view returns (address[] memory users) {
+        uint256 total = _registeredUsers.length;
+        
+        if (offset >= total) {
+            return new address[](0);
+        }
+        
+        uint256 end = offset + limit;
+        if (end > total) {
+            end = total;
+        }
+        
+        users = new address[](end - offset);
+        for (uint256 i = offset; i < end; i++) {
+            users[i - offset] = _registeredUsers[i];
+        }
+    }
+
+    /**
+     * @dev Get total number of registered users
+     * @return Total user count
+     */
+    function getTotalUsers() external view returns (uint256) {
+        return _registeredUsers.length;
+    }
+
+    /**
+     * @dev Add an authorized rater (typically the RatingSystem contract)
+     * @param rater Address to authorize
+     */
+    function addAuthorizedRater(address rater) external onlyOwner {
+        authorizedRaters[rater] = true;
+        emit AuthorizedRaterAdded(rater);
+    }
 }
