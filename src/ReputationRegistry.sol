@@ -174,6 +174,12 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         return data;
     }
 
+    /**
+     * @dev Get all registered users (paginated for large datasets)
+     * @param offset Starting index
+     * @param limit Maximum number of users to return
+     * @return users Array of user addresses
+     */
     function getRegisteredUsers(
         uint256 offset,
         uint256 limit
