@@ -209,6 +209,10 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         return _registeredUsers.length;
     }
 
+    /**
+     * @dev Add an authorized rater (typically the RatingSystem contract)
+     * @param rater Address to authorize
+     */
     function addAuthorizedRater(address rater) external onlyOwner {
         authorizedRaters[rater] = true;
         emit AuthorizedRaterAdded(rater);
