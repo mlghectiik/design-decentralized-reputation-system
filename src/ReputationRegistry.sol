@@ -218,6 +218,10 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         emit AuthorizedRaterAdded(rater);
     }
 
+     /**
+     * @dev Remove an authorized rater
+     * @param rater Address to remove authorization from
+     */
     function removeAuthorizedRater(address rater) external onlyOwner {
         authorizedRaters[rater] = false;
         emit AuthorizedRaterRemoved(rater);
