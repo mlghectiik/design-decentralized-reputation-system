@@ -226,4 +226,23 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         authorizedRaters[rater] = false;
         emit AuthorizedRaterRemoved(rater);
     }
+
+    /**
+     * @dev Update reputation calculation parameters
+     * @param _minRaterReputation Minimum reputation for weighted ratings
+     * @param _maxWeightMultiplier Maximum weight multiplier
+     */
+    function updateReputationParameters(
+        uint256 _minRaterReputation,
+        uint256 _maxWeightMultiplier
+    ) external onlyOwner {
+        if (_minRaterReputation > MAX_REPUTATION || _maxWeightMultiplier < 100) {
+            revert InvalidParameters();
+        }
+        
+        minRaterReputation = _minRaterReputation;
+        maxWeightMultiplier = _maxWeightMultiplier;
+        
+        emit ReputationParametersUpdated(_minRaterReputation, _maxWeightMultiplier);
+    }
 }
