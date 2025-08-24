@@ -291,6 +291,11 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         return (rating * weightMultiplier) / 100;
     }
 
+    /**
+     * @dev Calculate reputation with decay applied (view function)
+     * @param user Address of the user
+     * @return Decayed reputation score
+     */
     function _calculateDecayedReputation(address user) internal view returns (uint256) {
         if (!decayEnabled) {
             return _reputations[user].score;
