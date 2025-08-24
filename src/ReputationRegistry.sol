@@ -245,4 +245,8 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         
         emit ReputationParametersUpdated(_minRaterReputation, _maxWeightMultiplier);
     }
+
+    function setDecayEnabled(bool enabled) external onlyOwner {
+        decayEnabled = enabled;
+    }
 }
