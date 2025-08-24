@@ -326,4 +326,20 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
         
         return currentScore;
     }
+
+    function _applyDecay(address user) internal {
+        if (!decayEnabled) {
+            return;
+        }
+        
+        ReputationData storage userData = _reputations[user];
+        uint256 oldScore = userData.score;
+        uint256 newScore = _calculateDecayedReputation(user);
+        
+        if (newScore != oldScore) {
+            userData.score = newScore;
+            userData.lastDecayTime = block.timestamp;
+            emit ReputationDecayed(user, oldScore, newScore);
+        }
+    }
 }
