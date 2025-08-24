@@ -253,4 +253,12 @@ contract ReputationRegistry is Ownable, ReentrancyGuard {
     function setDecayEnabled(bool enabled) external onlyOwner {
         decayEnabled = enabled;
     }
+
+    function applyDecay(address user) external {
+        if (!_reputations[user].isRegistered) {
+            revert UserNotRegistered(user);
+        }
+        
+        _applyDecay(user);
+    }
 }
