@@ -23,4 +23,4 @@ interface IReputationRegistry {
  * @dev Handles rating submissions between users with anti-gaming mechanisms
  * @notice This contract manages the rating process and enforces business rules
  */
-contract RatingSystem {}
+contract RatingSystem is Ownable, ReentrancyGuard, Pausable {}
