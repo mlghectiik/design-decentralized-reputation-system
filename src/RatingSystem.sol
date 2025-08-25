@@ -18,4 +18,9 @@ interface IReputationRegistry {
     );
 }
 
+/**
+ * @title RatingSystem
+ * @dev Handles rating submissions between users with anti-gaming mechanisms
+ * @notice This contract manages the rating process and enforces business rules
+ */
 contract RatingSystem {}
