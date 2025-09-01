@@ -26,5 +26,6 @@ interface IReputationRegistry {
 contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     // Constants
     uint256 public constant MIN_RATING = 1;
+    uint256 public constant MAX_RATING = 1000;
 
 }
