@@ -46,4 +46,7 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         COLLABORATION,
         OTHER
     }
+
+    // Structs
+
 }
