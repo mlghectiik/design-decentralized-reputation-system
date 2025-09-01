@@ -48,5 +48,15 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     }
 
     // Structs
-
+    struct Rating {
+        address rater;           // Address of user giving the rating
+        address ratee;           // Address of user being rated
+        uint256 score;           // Rating score (1-1000)
+        RatingCategory category; // Category of rating
+        RatingContext context;   // Context of the interaction
+        string comment;          // Optional comment (IPFS hash recommended)
+        uint256 timestamp;       // When rating was submitted
+        bool isActive;           // Whether rating is still valid
+        uint256 blockNumber;     // Block number for verification
+    }
 }
