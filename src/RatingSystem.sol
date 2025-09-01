@@ -31,5 +31,11 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     uint256 public constant MAX_RATINGS_PER_PAIR = 5; // Max ratings between same users
 
     // Enums
-
+    enum RatingCategory {
+        OVERALL,
+        COMMUNICATION,
+        RELIABILITY,
+        QUALITY,
+        TIMELINESS
+    }
 }
