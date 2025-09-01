@@ -59,4 +59,12 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         bool isActive;           // Whether rating is still valid
         uint256 blockNumber;     // Block number for verification
     }
+
+    struct UserRatingStats {
+        uint256 totalRatingsGiven;
+        uint256 totalRatingsReceived;
+        uint256 averageGiven;
+        uint256 averageReceived;
+        uint256 lastRatingTime;
+    }
 }
