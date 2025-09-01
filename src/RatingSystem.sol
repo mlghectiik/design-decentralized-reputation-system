@@ -28,5 +28,6 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     uint256 public constant MIN_RATING = 1;
     uint256 public constant MAX_RATING = 1000;
     uint256 public constant DEFAULT_COOLDOWN = 24 hours;
+    uint256 public constant MAX_RATINGS_PER_PAIR = 5; // Max ratings between same users
 
 }
