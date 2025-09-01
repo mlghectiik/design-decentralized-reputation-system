@@ -67,4 +67,11 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         uint256 averageReceived;
         uint256 lastRatingTime;
     }
+
+    struct RatingLimits {
+        uint256 cooldownPeriod;     // Time between ratings of same user
+        uint256 maxRatingsPerDay;   // Max ratings a user can give per day
+        uint256 minReputationToRate; // Minimum reputation required to rate
+        bool requireMinReputation;   // Whether to enforce min reputation
+    }
 }
