@@ -38,4 +38,12 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         QUALITY,
         TIMELINESS
     }
+
+    enum RatingContext {
+        GENERAL,
+        TRANSACTION,
+        SERVICE,
+        COLLABORATION,
+        OTHER
+    }
 }
