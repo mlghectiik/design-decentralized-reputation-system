@@ -75,6 +75,7 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         bool requireMinReputation;   // Whether to enforce min reputation
     }
 
+    // State variables
     IReputationRegistry public immutable reputationRegistry;
 
 }
