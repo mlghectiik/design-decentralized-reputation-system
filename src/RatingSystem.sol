@@ -74,4 +74,13 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         uint256 minReputationToRate; // Minimum reputation required to rate
         bool requireMinReputation;   // Whether to enforce min reputation
     }
+
+    // State variables
+    IReputationRegistry public immutable reputationRegistry;
+
+    // Storage
+    mapping(uint256 => Rating) public ratings;
+    mapping(address => UserRatingStats) public userStats;
+    mapping(address => mapping(address => uint256[])) public userRatingHistory; // rater => ratee => rating IDs
+
 }
