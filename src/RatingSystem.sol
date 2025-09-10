@@ -82,5 +82,6 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     mapping(uint256 => Rating) public ratings;
     mapping(address => UserRatingStats) public userStats;
     mapping(address => mapping(address => uint256[])) public userRatingHistory; // rater => ratee => rating IDs
+    mapping(address => mapping(address => uint256)) public lastRatingTime; // rater => ratee => timestamp
 
 }
