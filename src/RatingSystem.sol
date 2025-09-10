@@ -87,4 +87,18 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     mapping(address => uint256[]) public ratingsReceivedByUser;
     mapping(address => mapping(uint256 => uint256)) public dailyRatingCount; // user => day => count
 
+    constructor(
+        address _reputationRegistry,
+        address _owner
+    ) Ownable(_owner) {
+        reputationRegistry = IReputationRegistry(_reputationRegistry);
+        
+        // Set default rating limits
+        ratingLimits = RatingLimits({
+            cooldownPeriod: DEFAULT_COOLDOWN,
+            maxRatingsPerDay: 10,
+            minReputationToRate: 100,
+            requireMinReputation: true
+        });
+    }
 }
